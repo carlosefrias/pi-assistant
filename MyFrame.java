@@ -10,24 +10,22 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Desktop;
-import java.net.URI;
-import java.net.URISyntaxException;
 
-import java.io.IOException;
+public class MyFrame extends JFrame{
 
-public class MainWindow{
-
-    private static String piracyUrl = "https://v1.mrpiracy.xyz/",
+    private static final long serialVersionUID = 1L;
+    private String piracyUrl = "https://v1.mrpiracy.xyz/",
                     youtubeUrl = "https://www.youtube.com/",
                     sportsUrl = "http://idimsports.eu",
                     googleUrl = "https://www.google.pt";
 
-    public static void main(String[] args){
-        JFrame frame = new JFrame("Assistant");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(200, 180);
-        frame.setResizable(false);
+    public MyFrame(String title){
+        super(title);
+
+        BrowserManager bm = BrowserManager.getInstance();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(200, 180);
+        setResizable(false);
         JButton futebolButton = new JButton("Futebol");
         JButton filmesButton = new JButton("Filmes");
         JButton youtubeButton = new JButton("Youtube");
@@ -35,22 +33,22 @@ public class MainWindow{
 
         futebolButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                openUrl(sportsUrl);
+                bm.openUrl(sportsUrl);
             }
         });
         filmesButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                openUrl(piracyUrl);
+                bm.openUrl(piracyUrl);
             }
         });
         youtubeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                openUrl(youtubeUrl);
+                bm.openUrl(youtubeUrl);
             }
         });
         googleButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                openUrl(googleUrl);
+                bm.openUrl(googleUrl);
             }
         });
         
@@ -67,22 +65,7 @@ public class MainWindow{
         buttonPane.add(Box.createRigidArea(new Dimension(0, 10)));
         buttonPane.add(googleButton);
 
-        Container contentPane = frame.getContentPane();
+        Container contentPane = getContentPane();
         contentPane.add(buttonPane, BorderLayout.CENTER);
-        
-        frame.setVisible(true);
-    }
-
-    private static void openUrl(String url){
-        System.out.println("A abrir site " + url);
-        //open url
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            try{
-                Desktop.getDesktop().browse(new URI(url));
-            }catch(URISyntaxException | IOException e){
-                System.out.println("Erro ao abrir " + url);
-                e.printStackTrace();
-            }
-        }
     }
 }
