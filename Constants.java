@@ -1,8 +1,8 @@
 public class Constants{
     // Url links
-    public static final String PIRACY_URL = "https://v1.mrpiracy.xyz/",
-                    YOUTUBE_URL = "https://www.youtube.com/",
-                    SPORTS_URL = "http://idimsports.eu",
-                    PLURALSIGHT_URL = "https://www.pluralsight.com",
-                    GOOGLE_URL = "https://www.google.pt";
+    public static final MyUrl PIRACY_URL = new MyUrl("https://v1.mrpiracy.xyz/", "Filmes"),
+                    YOUTUBE_URL = new MyUrl("https://www.youtube.com/", "Youtube"),
+                    SPORTS_URL = new MyUrl("http://idimsports.eu", "Futebol"),
+                    PLURALSIGHT_URL = new MyUrl("https://www.pluralsight.com", "Pluralsoght"),
+                    GOOGLE_URL = new MyUrl("https://www.google.pt", "Google");
 }

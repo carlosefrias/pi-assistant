@@ -27,11 +27,11 @@ public class MyFrame extends JFrame{
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.PAGE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         buttonPane.add(Box.createVerticalGlue());
-        addNewLinkButton("Filmes", Constants.PIRACY_URL, buttonPane);
-        addNewLinkButton("Futebol", Constants.SPORTS_URL, buttonPane);
-        addNewLinkButton("Youtube", Constants.YOUTUBE_URL, buttonPane);
-        addNewLinkButton("Pluralsight", Constants.PLURALSIGHT_URL, buttonPane);
-        addNewLinkButton("Google", Constants.GOOGLE_URL, buttonPane);
+        addNewLinkButton(Constants.PIRACY_URL, buttonPane);
+        addNewLinkButton(Constants.SPORTS_URL, buttonPane);
+        addNewLinkButton(Constants.YOUTUBE_URL, buttonPane);
+        addNewLinkButton(Constants.PLURALSIGHT_URL, buttonPane);
+        addNewLinkButton(Constants.GOOGLE_URL, buttonPane);
         Container contentPane = getContentPane();
         contentPane.add(buttonPane, BorderLayout.CENTER);
     }
@@ -41,12 +41,12 @@ public class MyFrame extends JFrame{
      * @param url Url link
      * @param panel Panel where the button is addded to
      */
-    private void addNewLinkButton(String buttonLabel, String url, JPanel panel){
-        JButton button = new JButton(buttonLabel);
+    private void addNewLinkButton(MyUrl mUrl, JPanel panel){
+        JButton button = new JButton(mUrl.getLabel());
         BrowserManager bm = BrowserManager.getInstance();
         button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                bm.openUrl(url);
+                bm.openUrl(mUrl.getUrl());
             }
         });
         panel.add(button);
