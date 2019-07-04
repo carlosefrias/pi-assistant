@@ -14,58 +14,42 @@ import java.awt.event.ActionListener;
 public class MyFrame extends JFrame{
 
     private static final long serialVersionUID = 1L;
-    private String piracyUrl = "https://v1.mrpiracy.xyz/",
-                    youtubeUrl = "https://www.youtube.com/",
-                    sportsUrl = "http://idimsports.eu",
-                    googleUrl = "https://www.google.pt";
-
+    /**
+     * Default Constructor
+     * @param title Title of the Frame
+     */
     public MyFrame(String title){
         super(title);
-
-        BrowserManager bm = BrowserManager.getInstance();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(200, 180);
+        setSize(200, 250);
         setResizable(false);
-        JButton futebolButton = new JButton("Futebol");
-        JButton filmesButton = new JButton("Filmes");
-        JButton youtubeButton = new JButton("Youtube");
-        JButton googleButton = new JButton("Google");
-
-        futebolButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                bm.openUrl(sportsUrl);
-            }
-        });
-        filmesButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                bm.openUrl(piracyUrl);
-            }
-        });
-        youtubeButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                bm.openUrl(youtubeUrl);
-            }
-        });
-        googleButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                bm.openUrl(googleUrl);
-            }
-        });
-        
-        //Lay out the buttons from left to right.
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.PAGE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         buttonPane.add(Box.createVerticalGlue());
-        buttonPane.add(futebolButton);
-        buttonPane.add(Box.createRigidArea(new Dimension(0, 10)));
-        buttonPane.add(filmesButton);
-        buttonPane.add(Box.createRigidArea(new Dimension(0, 10)));
-        buttonPane.add(youtubeButton);
-        buttonPane.add(Box.createRigidArea(new Dimension(0, 10)));
-        buttonPane.add(googleButton);
-
+        addNewLinkButton("Filmes", Constants.PIRACY_URL, buttonPane);
+        addNewLinkButton("Futebol", Constants.SPORTS_URL, buttonPane);
+        addNewLinkButton("Youtube", Constants.YOUTUBE_URL, buttonPane);
+        addNewLinkButton("Pluralsight", Constants.PLURALSIGHT_URL, buttonPane);
+        addNewLinkButton("Google", Constants.GOOGLE_URL, buttonPane);
         Container contentPane = getContentPane();
         contentPane.add(buttonPane, BorderLayout.CENTER);
+    }
+    /**
+     * Adds a button for the specified url link
+     * @param buttonLabel Text that appears on the button
+     * @param url Url link
+     * @param panel Panel where the button is addded to
+     */
+    private void addNewLinkButton(String buttonLabel, String url, JPanel panel){
+        JButton button = new JButton(buttonLabel);
+        BrowserManager bm = BrowserManager.getInstance();
+        button.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                bm.openUrl(url);
+            }
+        });
+        panel.add(button);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
     }
 }

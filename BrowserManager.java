@@ -2,19 +2,22 @@
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.io.IOException;
 
 public class BrowserManager{
 
     private static BrowserManager instance = null; 
     
-    // private constructor restricted to this class itself 
+    /**
+     * Default constructor
+     */
     private BrowserManager() 
     {
     } 
-  
-    // static method to create instance of Singleton class 
+    /**
+     * Retrives the singleton instance of this class
+     * @return singleton instance
+     */
     public static BrowserManager getInstance() 
     { 
         if (instance == null) 
@@ -22,6 +25,10 @@ public class BrowserManager{
         return instance; 
     }
 
+    /**
+     * Opens a specified web page in the default browser
+     * @param url Url to be opened
+     */
     public void openUrl(String url){
         System.out.println("A abrir site " + url);
         //open url
@@ -34,5 +41,4 @@ public class BrowserManager{
             }
         }
     }
-
 }
