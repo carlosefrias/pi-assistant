@@ -32,6 +32,7 @@ public class MyFrame extends JFrame{
         addNewLinkButton(Constants.YOUTUBE_URL, buttonPane);
         addNewLinkButton(Constants.PLURALSIGHT_URL, buttonPane);
         addNewLinkButton(Constants.GOOGLE_URL, buttonPane);
+        addNewLinkButton(Constants.RTP_PLAY, buttonPane);
         Container contentPane = getContentPane();
         contentPane.add(buttonPane, BorderLayout.CENTER);
     }
